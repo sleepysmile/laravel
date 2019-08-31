@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
+        "php": "7.2.*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0"
@@ -48,12 +48,28 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "build:env": [
+            "cp .env.dist .env"
+        ],
+        "build:workspace": [
+            "@composer install",
+            "echo 'waiting for mysql' && sleep 10"
+        ],
+        "docker:build": [
+            "@build:env",
+            "@docker:start",
+            "docker-compose exec -T workspace composer run-script build:workspace",
+            "echo \"All ok!\""
+        ],
+        "docker:start": [
+            "docker-compose up --force-recreate -d"
+        ],
+        "docker:cleanup": [
+            "docker-compose rm -fsv"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
