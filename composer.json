@@ -11,7 +11,9 @@
         "php": "7.2.*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "encore/laravel-admin": "@dev",
+        "laravel-admin-ext/media-manager": "@dev"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -70,9 +72,6 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
         ]
     }
 }
