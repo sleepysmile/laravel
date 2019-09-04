@@ -28,7 +28,7 @@ RUN apt-get purge -y g++ \
     && rm /install-composer.sh
 
 RUN usermod -u 1000 www-data
-RUN chmod 777 -R storage/
+#RUN chmod 777 -R storage/
 
 VOLUME /root/.composer
 WORKDIR /app
