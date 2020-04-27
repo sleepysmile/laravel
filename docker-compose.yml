@@ -26,8 +26,9 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /var/lib/mysql
-      - ./docker/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./docker/mysql/logs:/var/log/mysql:delegated
+      - ./docker/mysql/data:/var/lib/mysql:delegated
+      - /tmp:/tmp
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel_test
